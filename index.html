@@ -130,7 +130,7 @@
 					<ul>
 						<li>
 							<p>
-								The first bit of prior art are Java applets. Java Applets are small applications written in Java or another language which compiles to Java bytecode.
+								We begin with Java applets. Java Applets are small applications written in Java or another language which compiles to Java bytecode.
 							</p>
 							<p>
 								When a user launches a Java applet from a webpage, the applet is executed within the Java Virtual Machine (JVM) in a process separate from the browser itself.
@@ -139,24 +139,24 @@
 								For much of their life on the web, applets were significantly faster than JavaScript and were especially useful for compute intensive applications.
 							</p>
 							<p>
-								However, as JavaScript engines have improved and gained support for hardware-accelerated graphics, the speed difference has diminished significantly.
+								However, as JavaScript engines have improved and gained support for hardware-accelerated graphics, the speed difference diminished significantly.
 							</p>
 							<p>
-								Accordingly, Java applets have less of a role on the web and have now been deprecated.
+								Accordingly, Java applets are no longer necessary, and they have now been deprecated.
 							</p>
 						</li>
 						<li>
 							As an alternative to Java Applets, Microsoft created ActiveX which allowed running unsandboxed native code. In theory, ActiveX was OS independent; however, in practice, ActiveX was strongly tied to Windows operating systems.
 						</li>
 						<li>
-							The next bit of prior art is Google Native Client (NaCl), which is a sandboxing technology capable of running native code at near native speed on select processors, such as Intel x86 and ARM.
+							Next is Google Native Client (NaCl), which is a sandboxing technology capable of running native code at near native speed on select processors, such as Intel x86 and ARM.
 						</li>
 						<li>
 							NaCl was followed by Portable Native Client (PNaCl), which is an architecture-independent version of NaCl. Google has since deprecated PNaCl in favor of WebAssembly.
 						</li>
 						<li>
 							<p>
-								The last bit of prior art is asm.js, which started off as a research project at Mozilla.
+								Last is asm.js, which started off as a research project at Mozilla.
 							</p>
 							<p>
 								The goal was to determine whether JavaScript could be reduced to a language subset, capable of ahead-of-time optimizations and other performance improvements similar to that of statically compiled languages.
@@ -209,7 +209,7 @@
 
 			<section class="center">
 				<aside class="notes">
-					As I mentioned, WebAssembly is a compilation target. So before going further, I want to make brief interlude regarding compilers...
+					As I mentioned, WebAssembly is a compilation target. So before going further, I want to briefly talk about compilers...
 				</aside>
 			</section>
 
@@ -234,7 +234,7 @@
 
 				<aside class="notes">
 					<p>
-						Many modern compilers, such as LLVM and GCC, are now split into two components: a frontend compiler, responsible for taking a higher level language like C or C++ and compiling to an optimized intermediate representation (IR), which is a low-level language similar to assembly, and a backend compiler, responsible for translating the intermediate representation to instruction sets (i.e., machine code).
+						Many modern compilers, such as LLVM and GCC, have two components: a frontend compiler, responsible for taking a higher level language like C or C++ and compiling to an optimized intermediate representation (IR), which is a low-level language similar to assembly, and a backend compiler, responsible for translating the intermediate representation to instruction sets (i.e., machine code).
 					</p>
 					<p>
 						By doing this, no longer is the translation problem N by M (or multiplicative), but additive, N plus M.
@@ -341,7 +341,7 @@
 						...here is WebAssembly module which exports a single function "add" which adds two 32-bit integers and returns a 32-bit integer result.
 					</p>
 					<p>
-						Similar to LISP, the text format, commonly referred to as WAST, uses s-expressions for representing the program "tree".
+						Similar to LISP, the text format, commonly referred to as WAT, uses s-expressions for representing the program "tree".
 					</p>
 					<p>
 						The type section contains function definitions that are used in the module.
@@ -386,7 +386,7 @@
 
 				<aside class="notes">
 					<p>
-						Moving along...now that we have a simple working example, let's turn our attention to the binary format.
+						Now that we have a simple working example, let's discuss the binary format.
 					</p>
 					<p>
 						The binary format is a dense representation of a WebAssembly module.
@@ -615,7 +615,7 @@
 						The current WebAssembly specification defines many operators and functions for data type conversion, truncation, reinterpretation, promotion, and demotion.
 					</p>
 					<p>
-						Here, I am listing operators for working with 32-bit integers. For the complete list of operators, see the specification.
+						Here, I am listing operators for 32-bit integers. For the complete list of operators, see the specification.
 					</p>
 				</aside>
 			</section>
@@ -639,30 +639,30 @@
 
 				<aside class="notes">
 					<p>
-						WebAssembly has several purported advantages...
+						WebAssembly has several stated advantages...
 					</p>
 					<ul>
 						<li>
-							First, the binary format is compact, which means fewer bytes must be sent over the wire and faster load times.
+							First, the binary format is compact, which means fewer bytes must be sent across a network and faster load times.
 						</li>
 						<li>
-							Next, because the binary format is structured, having a defined layout, module loaders need to perform only a single-pass in order to parse an encoded module into an AST in preparation for translating to machine code. The advantage of only requiring a single-pass is that modules are able to be instantiated faster compared to a module written in vanilla JavaScript.
+							Next, because the binary format is structured, having a defined layout, module loaders need to only perform a single-pass in order to parse an encoded module into an AST in preparation for translating to machine code. The advantage of only requiring a single-pass is that modules can be instantiated faster compared to a module written in vanilla JavaScript.
 						</li>
 						<li>
-							Third, WebAssembly is strongly typed, which means more efficient serialization and, again, fewer bytes sent over the wire.
+							Third, WebAssembly is strongly typed, which means more efficient serialization and, again, fewer bytes sent across a network.
 						</li>
 						<li>
 							<p>
-								Next, because WebAssembly is strongly typed, compilers are able to perform ahead-of-time optimizations. This stands in contrast to JavaScript for instance which first must be compiled and monitored to determine if particular functions are running "hot".
+								Next, because WebAssembly is strongly typed, compilers are able to perform ahead-of-time optimizations. This is in contrast to JavaScript, for instance, which first must be compiled and monitored to determine if particular functions are running "hot".
 							</p>
 							<p>
-								Once a function is "hot", the function gets sent to an optimizing compiler which makes optimistic assumptions about input value types and code paths, essentially creating an optimized version of the "hot" function.
+								Once a function is "hot", the function is sent to an optimizing compiler which makes optimistic assumptions about input value types and code paths, essentially creating an optimized version of the "hot" function.
 							</p>
 							<p>
-								If a function receives an unexpected input value type, the optimized function gets de-optimized and the cycle repeats indefinitely or until a function gets put in "deoptimization hell".
+								If a function receives an unexpected input value type, the optimized function is de-optimized and the cycle repeats indefinitely or until a function is put in "deoptimization hell".
 							</p>
 							<p>
-								So instead of runtime optimization, with WebAssembly, we can do much of the optimization an optimizing compiler does before ever running in a JavaScript runtime.
+								So instead of runtime optimization, with WebAssembly, we can perform the optimization an optimizing compiler does before ever running in a JavaScript runtime.
 							</p>
 						</li>
 						<li>
@@ -680,7 +680,7 @@
 							</p>
 						</li>
 						<li>
-							If we combine all the aforementioned advantages, WebAssembly promises, for certain applications, better performance compared to JavaScript.
+							If we combine all of these advantages, WebAssembly promises, for certain applications, better performance compared to JavaScript.
 						</li>
 				</aside>
 			</section>
@@ -689,7 +689,7 @@
 				<h2 class="no-text-transform">Toolchain</h2>
 
 				<aside class="notes">
-					So that finishes my high-level overview of WebAssembly. Next, I want to talk about the toolchain.
+					So that completes my high-level overview of WebAssembly. Next, I want to talk about the toolchain.
 				</aside>
 			</section>
 
@@ -704,7 +704,7 @@
 						It takes LLVM bitcode, which can be generated from C/C++ using llvm-gcc or clang, or from any other language which can be compiled to LLVM bitcode, and compiles that into JavaScript.
 					</p>
 					<p>
-						In practice, Emscripten serves as a drop-in replacement for a compiler like gcc, which, instead of binary, outputs JavaScript.
+						In practice, Emscripten is a replacement for a compiler like gcc, which, instead of binary, outputs JavaScript.
 					</p>
 				</aside>
 			</section>
@@ -731,7 +731,7 @@
 						</li>
 						<li>
 							<p>
-								The WebAssembly Binary Toolkit (or WABT) is a set of tools for converting between the WebAssembly binary format and the WebAssembly text format.
+								The WebAssembly Binary Toolkit (or WABT, pronounced "Wabbit") is a set of tools for converting between the WebAssembly binary format and the WebAssembly text format.
 							</p>
 						</li>
 					</ul>
@@ -1801,7 +1801,7 @@ var join = require( 'path' ).join;
 var createModule = require( './dasum.wasm.js' );
 
 var opts = {
-    'memory': 16777216,
+    'memory': 16777216, // 16MB
     'wasmBinaryFile': join( __dirname, 'dasum.wasm' )
 };
 
@@ -1896,7 +1896,7 @@ for ( i = 0; i &lt; 10; i++ ) {
 				</code></pre>
 
 				<aside class="notes">
-					Set values directly on the heap. If possible work with the heap directly. Copying data from externally defined buffers (e.g., typed arrays) can be a significant performance bottleneck. When possible, reuse and share memory. Here, we reuse the view 10 times.
+					Set values directly on the heap. If possible, work with the heap directly. Copying data from externally defined buffers (e.g., typed arrays) can significantly affect performance. When possible, reuse and share memory. Here, we reuse the view 10 times.
 				</aside>
 			</section>
 
@@ -2018,7 +2018,7 @@ for ( i = 0; i &lt; 10; i++ ) {
 							WebAssembly integration into browser developer tools.
 						</li>
 						<li>
-							Also on the roadmap are new features: threads, SIMD, exception-handling, GC, full IEEE 754 support.
+							Also on the roadmap are new features: threads, SIMD (fixed-length; aka "short" SIMD), dynamic linking, exception-handling, GC, full IEEE 754 support.
 						</li>
 						<li>
 							You can start experimenting with WebAssembly now. Recent browsers and in Node.js version 8.
