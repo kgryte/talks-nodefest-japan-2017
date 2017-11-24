@@ -7,6 +7,7 @@
 	var footer = document.querySelector( 'footer' );
 	var splash = document.querySelector( '#splash' );
 	var banner = document.querySelector( '#banner' );
+	var microbenchmarks = document.querySelector( '#microbenchmarks' );
 
 	/**
 	* Callback invoked upon a `ready` event.
@@ -17,7 +18,8 @@
 	function onReady( event ) {
 		if (
 			event.currentSlide === banner ||
-			event.currentSlide === splash
+			event.currentSlide === splash ||
+			event.currentSlide === microbenchmarks
 		) {
 			header.classList.add( 'hidden' );
 			footer.classList.add( 'hidden' );
@@ -36,13 +38,15 @@
 	function onChange( event ) {
 		if (
 			event.currentSlide === banner ||
-			event.currentSlide === splash
+			event.currentSlide === splash ||
+			event.currentSlide === microbenchmarks
 		) {
 			header.classList.add( 'hidden' );
 			footer.classList.add( 'hidden' );
 		} else if (
 			event.previousSlide === banner ||
-			event.previousSlide === splash
+			event.previousSlide === splash ||
+			event.previousSlide === microbenchmarks
 		) {
 			header.classList.remove( 'hidden' );
 			footer.classList.remove( 'hidden' );
