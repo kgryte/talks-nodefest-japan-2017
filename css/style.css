@@ -51,12 +51,6 @@
 	font-size: 1.5em;
 }
 
-#splash h1,
-#splash a,
-#splash {
-	color: #efefef!important;
-}
-
 .reveal .no-text-transform {
 	text-transform: none!important;
 }
